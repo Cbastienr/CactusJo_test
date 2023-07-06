@@ -1,6 +1,6 @@
 const Product = require('../Models/productModel');
 
-// Récupérer tous les produits
+// GET products
 exports.getProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -11,7 +11,7 @@ exports.getProducts = async (req, res) => {
   }
 };
 
-// Récupérer un produit par son ID
+// GETbyID product 
 exports.getProductById = async (req, res) => {
   try {
     const productId = req.params.id;
@@ -29,7 +29,7 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-// Créer un nouveau produit
+// POST new product
 exports.createProduct = async (req, res) => {
   try {
     const { name, price, rating, warranty_years, available } = req.body;
@@ -50,7 +50,7 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// Mettre à jour un produit
+// PUT/ update product
 exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
@@ -67,9 +67,6 @@ exports.updateProduct = async (req, res) => {
       return;
     }
 
-    // Émettre un événement de modification de produit
-    io.emit('productUpdated', productId);
-
     res.json(product);
   } catch (error) {
     console.log('Erreur lors de la mise à jour du produit :', error);
@@ -77,7 +74,7 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-// Supprimer un produit
+// DELETE product
 exports.deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
