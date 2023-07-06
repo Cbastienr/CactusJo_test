@@ -1,4 +1,4 @@
-const Product = require('./productModel');
+const Product = require('../Models/productModel');
 
 // Récupérer tous les produits
 exports.getProducts = async (req, res) => {
@@ -32,14 +32,13 @@ exports.getProductById = async (req, res) => {
 // Créer un nouveau produit
 exports.createProduct = async (req, res) => {
   try {
-    const { id, name, price, ratings, warranty_year, available } = req.body;
+    const { name, price, rating, warranty_years, available } = req.body;
     
     const product = new Product({
-      id,
       name,
       price,
-      ratings,
-      warranty_year,
+      rating,
+      warranty_years,
       available,
     });
     
@@ -55,11 +54,11 @@ exports.createProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
-    const { name, price, ratings, warranty_year, available } = req.body;
+    const { name, price, rating, warranty_years, available } = req.body;
     
     const product = await Product.findByIdAndUpdate(
       productId,
-      { name, price, ratings, warranty_year, available },
+      { name, price, rating, warranty_years, available },
       { new: true }
     );
 

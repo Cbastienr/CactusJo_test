@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
-  id: {
-    type: Number,
-    required: true,
-  },
   name: {
     type: String,
     required: true,
@@ -13,11 +9,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  ratings: {
+  rating: {
     type: Number,
     required: true,
   },
-  warranty_year: {
+  warranty_years: {
     type: Number,
     required: true,
   },
