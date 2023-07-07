@@ -32,10 +32,11 @@ exports.getProductById = async (req, res) => {
 // POST new product
 exports.createProduct = async (req, res) => {
   try {
-    const { name, price, rating, warranty_years, available } = req.body;
+    const { name, type, price, rating, warranty_years, available } = req.body;
     
     const product = new Product({
       name,
+      type,
       price,
       rating,
       warranty_years,
@@ -54,11 +55,11 @@ exports.createProduct = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
-    const { name, price, rating, warranty_years, available } = req.body;
+    const { name, type, price, rating, warranty_years, available } = req.body;
     
     const product = await Product.findByIdAndUpdate(
       productId,
-      { name, price, rating, warranty_years, available },
+      { name, type, price, rating, warranty_years, available },
       { new: true }
     );
 
