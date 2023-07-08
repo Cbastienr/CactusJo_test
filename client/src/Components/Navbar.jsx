@@ -1,20 +1,31 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, makeStyles } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import './fonts.css';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: 'fixed',
-    backgroundColor: '#00695',
+    backgroundColor: '#00796b',
   },
   title: {
-    flexGrow: 1,
-    fontFamily: 'Orbitron, sans-serif',
-    letterSpacing: '1px',
+    fontSize: '40px',
+    fontFamily: 'Rubik Puddles, cursive',
+    color: theme.palette.primary.contrastText,
   },
   menuIcon: {
     marginRight: theme.spacing(2),
   },
+  menuContainer: {
+    marginLeft: 'auto',
+    display: 'flex',
+    alignItems: 'flex-end',
+  },
+  menuText: {
+    marginRight: 'auto',
+    fontFamily: 'Rubik Puddles, cursive',
+  },
+  
 }));
 
 const Navbar = () => {
@@ -29,16 +40,22 @@ const Navbar = () => {
         <Typography variant="h6" className={classes.title}>
           CactusJo
         </Typography>
-        <IconButton color="inherit" aria-label="Products">
-          <Typography variant="body1" className={classes.menuText}>
-            Products
-          </Typography>
-        </IconButton>
-        <IconButton color="inherit" aria-label="About">
-          <Typography variant="body1" className={classes.menuText}>
-            About
-          </Typography>
-        </IconButton>
+        <div className={classes.menuContainer}>
+          <div className={classes.topRight}>
+            <IconButton color="inherit" aria-label="Products">
+              <Typography variant="body1" className={classes.menuText}>
+                Products
+              </Typography>
+            </IconButton>
+          </div>
+          <div className={classes.topRight}>
+            <IconButton color="inherit" aria-label="About">
+              <Typography variant="body1" className={classes.menuText}>
+                About
+              </Typography>
+            </IconButton>
+          </div>
+        </div>
       </Toolbar>
     </AppBar>
   );

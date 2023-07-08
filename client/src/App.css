@@ -1,14 +1,20 @@
-.App {
+.Hero-section {
+  background-color: #80cbc4;
+  padding: 100px 0;
+}
+
+.Hero-content {
+  max-width: 600px;
+  margin: 0 auto;
   text-align: center;
 }
 
-.App-header {
-  background-image: url('../public/iphone-14-pro-max-1.jpg');
-  background-size: cover;
-  background-position: center;
-  min-height: 50vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.Hero-content h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.Hero-content p {
+  font-size: 18px;
+  color: #eeeeee;
 }

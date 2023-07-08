@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState } from 'react';
 import { Container, Typography, Grid, TextField, Button, makeStyles } from '@material-ui/core';
 import { createProduct } from '../service/api';
 
@@ -21,8 +21,8 @@ const Add = () => {
 
   const [name, setName] = useState('');
   const [type, setType] = useState('');
-  const [price, setPrice] = useState(0);
-  const [rating, setRating] = useState(0);
+  const [price, setPrice] = useState('');
+  const [rating, setRating] = useState('');
   const [warrantyYears, setWarrantyYears] = useState(0);
   const [available, setAvailable] = useState(false);
 
@@ -31,15 +31,15 @@ const Add = () => {
       await createProduct({
         name,
         type,
-        price,
-        rating,
+        price: parseFloat(price),
+        rating: parseFloat(rating),
         warranty_years: warrantyYears,
         available,
       });
       setName('');
       setType('');
-      setPrice(0);
-      setRating(0);
+      setPrice('');
+      setRating('');
       setWarrantyYears(0);
       setAvailable(false);
     } catch (error) {
@@ -47,15 +47,29 @@ const Add = () => {
     }
   };
 
+  const handlePriceChange = (event) => {
+    const { value } = event.target;
+    if (value >= 0 || value === '') {
+      setPrice(value);
+    }
+  };
+
+  const handleRatingChange = (event) => {
+    const { value } = event.target;
+    if (value >= 0 || value === '') {
+      setRating(value);
+    }
+  };
+
   return (
     <Container maxWidth="sm" className={classes.container}>
       <Typography variant="h4" align="center" gutterBottom>
-        Ajouter un nouveau produit
+        Let's go
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6}>
           <TextField
-            label="Nom"
+            label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             fullWidth
@@ -73,37 +87,40 @@ const Add = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            label="Prix"
+            label="Price"
             type="number"
             value={price}
-            onChange={(e) => setPrice(Number(e.target.value))}
+            onChange={handlePriceChange}
             fullWidth
             className={classes.textField}
+            inputProps={{ min: '0', step: '0.01' }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            label="Note"
+            label="Rating"
             type="number"
             value={rating}
-            onChange={(e) => setRating(Number(e.target.value))}
+            onChange={handleRatingChange}
             fullWidth
             className={classes.textField}
+            inputProps={{ min: '0', step: '0.1' }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            label="Garantie (années)"
+            label="Warranty (years)"
             type="number"
             value={warrantyYears}
-            onChange={(e) => setWarrantyYears(Number(e.target.value))}
+            onChange={(e) => setWarrantyYears(parseInt(e.target.value, 10))}
             fullWidth
             className={classes.textField}
+            inputProps={{ min: '0' }}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            label="Disponible"
+            label="Available"
             select
             value={available}
             onChange={(e) => setAvailable(e.target.value)}
@@ -115,9 +132,13 @@ const Add = () => {
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" color="primary" onClick={handleCreateProduct}>
-            Ajouter
-          </Button>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: '#80cbc4', color: 'white' }}
+          onClick={handleCreateProduct}
+        >
+          Add
+        </Button>
         </Grid>
       </Grid>
     </Container>
